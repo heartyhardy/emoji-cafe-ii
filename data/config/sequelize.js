@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // CONNECT TO MYSQL DB THROUGH SEQUELIZE - DEV
-const sequelize = new Sequelize('emoji-cafe-ii', 'root', '123321', {
+const sequelize = new Sequelize('emoji_cafe_ii', 'root', '123321', {
     host: 'localhost',
     dialect: 'mysql'
 });

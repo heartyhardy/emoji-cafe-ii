@@ -5,8 +5,11 @@ const parser = require('body-parser');
 const root_route = require('./routes/root');
 const emoji_route = require('./routes/emoji');
 
+// IMPORT DB CONFIG
+const { sync_db } = require('./data/config/sync');
+
 // IMPORT BUILD PATH
-const {_build} = require('./util/path');
+const { _build } = require('./util/path');
 
 // SET CUSTOM PORT
 const PORT = process.env.PORT || 5000;
@@ -20,5 +23,13 @@ app.use(parser.json());
 app.use(root_route.router);
 app.use('/emoji', emoji_route.router);
 
-// START THE EXPRESS SERVER
-app.listen(PORT, ()=>console.log("\x1b[36m", "😎  Serving emoji's like nobody's business!"));
+(async () => {
+    try {
+        let result = await sync_db();
+
+        // START THE EXPRESS SERVER
+        app.listen(PORT, () => console.log("\x1b[36m", "😎  Serving emoji's like nobody's business!"));
+    } catch (e) {
+        throw new Error(e);
+    }
+})();

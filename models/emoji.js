@@ -3,12 +3,12 @@ const Sequelize = require('sequelize');
 const sequelize = require('../data/config/sequelize');
 
 const Emoji = sequelize.define('emoji', {
-    _id: {
-        type: Sequelize.UUIDV4,
+    id: {
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
         validate: {
+            notEmpty: true,
             isUUID: 4
         }
     },
