@@ -4,11 +4,13 @@ const sequelize = require('../data/config/sequelize');
 
 const Emoji = sequelize.define('emoji', {
     id: {
-        type: Sequelize.UUID,
+        type: Sequelize.BIGINT,
         primaryKey: true,
         allowNull: false,
+        autoIncrement: true,
         validate: {
-            notEmpty: true,
+            isInt: true,
+            isNumeric: true,
             isUUID: 4
         }
     },
@@ -16,7 +18,7 @@ const Emoji = sequelize.define('emoji', {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            isAlpha: true,
+            notEmpty: true,
             len: [3, 50]
         }
     },
@@ -24,8 +26,17 @@ const Emoji = sequelize.define('emoji', {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            isAlpha: true,
+            notEmpty: true,
             len: [3, 50]
+        }
+    },
+    emoji: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            notEmpty: true,
+            len: [1, 2]
         }
     }
 })

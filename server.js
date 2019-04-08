@@ -23,6 +23,7 @@ app.use(parser.json());
 app.use(root_route.router);
 app.use('/emoji', emoji_route.router);
 
+// SYNC DB AND START THE SERVER
 (async () => {
     try {
         let result = await sync_db();
